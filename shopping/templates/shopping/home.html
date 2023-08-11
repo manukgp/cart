@@ -1,0 +1,32 @@
+{% extends 'shopping/base.html' %}
+{% block content %}   
+{% for item in items %}
+
+<article>
+
+    {{ item.item }}<br/>
+
+    price: {{item.price}}<br/>
+
+    discount: {{item.discount}}<br/>
+
+    description: {{ item.description }}<br/>
+
+    <hr>
+
+</article>   
+
+{% endfor %}     
+    <!-- {% for item in items %}
+        <article class="media content-section">
+            <div class="media-body">
+              <div class="article-metadata">
+                <a class="mr-2" href="">{{ item.name }}</a>
+                <smal class="text-muted">{{ item.description }}</small>
+              </div>
+              <h2><a class="article-title" href="">{{ item.price }}</a></h2>
+              <p class="article-content">{{ item.discount }}</p>
+            </div>
+          </article>
+    {% endfor %}    -->
+{% endblock content %}

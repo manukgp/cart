@@ -1,0 +1,15 @@
+{% extends 'shopping/base.html' %}
+
+{% block content %}
+  <h1>Shopping Item Detail</h1>
+
+  <h2>{{ item.item }}</h2>
+  <p>Description: {{ item.description }}</p>
+  <p>Price: ${{ item.price }}</p>
+  <p>Discount: {{ item.discount }}%</p>
+  <p>Discounted Price: ${{ item.discounted_price }}</p>
+
+  <a href="{% url 'shopping_item_list' %}">Back to List</a>
+  <a href="{% url 'shopping_item_update' item.pk %}">Edit</a>
+  <a href="{% url 'shopping_item_delete' item.pk %}">Delete</a>
+{% endblock %}

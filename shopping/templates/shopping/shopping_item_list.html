@@ -1,0 +1,17 @@
+{% extends 'shopping/base.html' %}
+
+{% block content %}
+  <h1>Shopping Item List</h1>
+
+  <ul>
+    {% for item in items %}
+      <li>
+        <a href="{% url 'shopping_item_detail' item.pk %}">{{ item.item }}</a>
+      </li>
+    {% empty %}
+      <li>No shopping items available.</li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'shopping_item_create' %}">Add New Item</a>
+{% endblock %}

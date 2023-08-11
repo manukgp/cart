@@ -1,43 +1,42 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import ShoppingItem
 from .forms import ShoppingForm
+from django.http import HttpResponse
 
-def create_view(request): 
-    context ={} 
-  
-    form = ShoppingForm(request.POST or None) 
-    if form.is_valid(): 
-        form.save() 
-          
-    context['form']= form 
-    return render(request, "create_view.html", context)
+def home(request):
+    items = ShoppingItem.objects.all()
+    return render(request, 'shopping/home.html', {'items':items})
+
+def about(request):
+    return render(request, 'shopping/about.html')
 
 def shopping_item_list(request):
     items = ShoppingItem.objects.all()
-    return render(request, 'shopping_item_list.html', {'items': items})
+    return render(request, 'shopping/shopping_item_list.html', {'items': items})
 
 def shopping_item_detail(request, pk):
-    item = get_object_or_404(ShoppingItem, pk=pk)
-    return render(request, 'shopping_item_detail.html', {'item': item})
+    items = get_object_or_404(ShoppingItem, pk=pk)
+    return render(request, 'shopping/shopping_item_detail.html', {'item': items})
 
 def shopping_item_create(request):
     form = ShoppingForm(request.POST or None)
     if form.is_valid():
         form.save()
         return redirect('shopping_item_list')
-    return render(request, 'shopping_item_form.html', {'form': form})
+    return render(request, 'shopping/shopping_item_form.html', {'form': form})
+    # return HttpResponse("account created")
 
 def shopping_item_update(request, pk):
-    item = get_object_or_404(ShoppingItem, pk=pk)
-    form = ShoppingForm(request.POST or None, instance=item)
+    items = get_object_or_404(ShoppingItem, pk=pk)
+    form = ShoppingForm(request.POST or None, instance=items)
     if form.is_valid():
         form.save()
         return redirect('shopping_item_list')
-    return render(request, 'shopping_item_form.html', {'form': form})
+    return render(request, 'shopping/shopping_item_form.html', {'form': form})
 
 def shopping_item_delete(request, pk):
-    item = get_object_or_404(ShoppingItem, pk=pk)
+    items = get_object_or_404(ShoppingItem, pk=pk)
     if request.method == 'POST':
-        item.delete()
+        items.delete()
         return redirect('shopping_item_list')
-    return render(request, 'shopping_item_confirm_delete.html', {'item': item})
+    return render(request, 'shopping/shopping_item_confirm_delete.html', {'item': items})
