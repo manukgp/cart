@@ -1,0 +1,21 @@
+{% extends 'shopping/base.html' %}
+{% block content %}   
+  <article class="media content-section">
+    <img src="{{ object.image.url }}" alt="{{ object.item }}" width="200">
+    <div class="media-body">
+      <div class="article-metadata">
+        Rs. {{ object.price }}
+        <small class="text-muted">{{ object.discount }}% off</small>
+      </div>
+      <h3>{{ object.item }}</h3>
+      <p class="article-content">{{ object.description }}</p>
+    </div>
+  </article>
+{% endblock %}
+<a href="{% url 'shopping_home' %}">Back to List</a>
+
+
+<!-- <a href="{% url 'shopping_item_update' item.pk %}">Edit</a>
+<a href="{% url 'shopping_item_delete' item.pk %}">Delete</a> -->
+
+

@@ -2,10 +2,23 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import ShoppingItem
 from .forms import ShoppingForm
 from django.http import HttpResponse
+from django.views.generic import ListView, DetailView, DeleteView
 
 def home(request):
     items = ShoppingItem.objects.all()
     return render(request, 'shopping/home.html', {'items':items})
+
+class ItemListView(ListView):
+    model = ShoppingItem
+    template_name = 'shopping/home.html'
+    context_object_name = 'items'
+    ordering = [ 'item' ]    
+
+class ItemDetailView(DetailView):
+    model = ShoppingItem
+    # template_name = 'shopping/shopping_item_detail.html'
+    # context_object_name = 'items'
+
 
 def about(request):
     return render(request, 'shopping/about.html')
