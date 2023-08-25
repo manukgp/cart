@@ -5,9 +5,6 @@ from .models import Profile
 
 @receiver(pre_save, sender=User)
 def pre_save_receiver(sender, instance, **kwargs):
-    """
-    Signal receiver to print the current state of the object before saving.
-    """
     print("Current state before saving:")
     print(instance.__dict__)
 

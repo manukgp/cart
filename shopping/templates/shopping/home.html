@@ -8,7 +8,7 @@
         Rs. {{ item.price }}
         <small class="text-muted">{{ item.discount }}% off</small>
       </div>
-      <h3><a class="article-title" style="color: blue;" href="{% url 'item_detail' %} item.id">{{ item.item }}</a></h3>
+      <h3><a class="article-title" style="color: blue;" href="{% url 'item_detail' item.id %}">{{ item.item }}</a></h3>
       <p class="article-content">{{ item.description }}</p>
     </div>
   </article>

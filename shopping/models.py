@@ -1,9 +1,8 @@
 from django.db import models
 from django.core.validators import MinValueValidator
-from django.contrib.auth.models import User
+from django.urls import reverse
 
 class ShoppingItem(models.Model):
-    id = models.AutoField(primary_key=True)
     item = models.CharField(max_length=100)
     description = models.TextField(max_length=220, blank=True, default=None)
     price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
@@ -16,4 +15,5 @@ class ShoppingItem(models.Model):
     def __str__(self):
         return self.item
     
-
+    def get_absolute_url(self):
+        return reverse('item_detail', kwargs={'pk':self.pk})

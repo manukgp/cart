@@ -1,0 +1,33 @@
+{% extends "shopping/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <h2>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Shopping Item</h2>
+    <div class="content-section">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Create new Shopping Item</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+  <a href="{% url 'item_list' %}">Back to List</a>
+{% endblock %}
+<!-- <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>FORMS</title>
+    </head>
+    <header><b><u>User Form</u></b></header>
+    <body>
+        <h1>Enter your name</h1>
+        <form>
+            <textarea name='text' style='margin-left: auto;'></textarea>
+            <button type = 'submit'>Create profile</button>
+        </form>
+    </body>
+</html> -->

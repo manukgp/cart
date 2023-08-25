@@ -1,13 +1,22 @@
-from django.urls import path
+from django.urls import path, include
 from .views import ItemListView, ItemDetailView
 from . import views
+from rest_framework import routers
+from rest_framework.routers import DefaultRouter
+from .views import ShoppingItemViewSet
+
+router = routers.DefaultRouter()
+router.register(r'items', views.ShoppingItemViewSet)
 
 urlpatterns = [
 	path('', ItemListView.as_view(), name='shopping_home'),
-	path('create', views.shopping_item_create, name='shopping_item_create'),
-    path('list', views.shopping_item_list, name='shopping_item_list'),
+    path('list/', ItemListView.as_view(), name='item_list'),
 	path('item/<int:pk>/', ItemDetailView.as_view(), name='item_detail'),
-	path('update', views.shopping_item_update, name='shopping_item_update'),
-	path('delete', views.shopping_item_delete, name= 'shopping_item_delete'),
-	path('about', views.about, name='shopping_about'),
+	path('create/', views.shopping_item_create, name='item_form'),
+	path('update/<int:pk>/', views.shopping_item_update, name='item_update'),
+	path('delete/<int:pk>/', views.shopping_item_delete, name='item_delete'),
+	path('about/', views.about, name='shopping_about'),
+    
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
